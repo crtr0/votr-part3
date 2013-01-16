@@ -10,7 +10,7 @@
 <body>
 	<div class="container">
 		<h1>{{ name }}</h1>
-		<div><span class="cta {{ state }}">Text {num} or call </span>
+		<div><span class="cta {{ state }}">Text {num} to </span>
 		<span class="phone {{ state }}"> {{ phonenumber }} </span>
 		<span class="cta {{ state }}"> to Vote!</span></div>
 		<h2 class="{{ state }}">Voting is: {{ state }}</h2>
@@ -61,7 +61,7 @@
 		    },
 
 		    title: {
-		        text: 'Voice and SMS Voting'
+		        text: 'SMS Voting'
 		    },
 
 		    subtitle: {
