@@ -5,6 +5,4 @@ This app is part of the [third blog post][1] in a four-part series on building a
 
 
 
-[1]: http://www.twilio.com/blog/foo
-[2]: http://www.highcharts.com
-[3]: http://socket.io
+[1]: http://www.twilio.com/blog/2013/01/building-a-real-time-sms-voting-app-part-3-scaling-node-js-and-couchdb.html
