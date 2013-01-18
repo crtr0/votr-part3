@@ -48,4 +48,8 @@ io.sockets.on('connection', function(socket) {
     });
 });
 
-require('./routes')(app, io);
+var routes = require('./routes')(io);
+
+app.get('/', routes.index);
+app.get('/events/:shortname', routes.getEvent);
+app.post('/vote/sms', routes.voteSMS);

@@ -1,14 +1,13 @@
 var utils = require('../utils')
   , config = require('../config')
   , twilio = require('twilio')
-  , events = require('../events')
+  , events
   , io;
 
-module.exports = function(app, socketio) {
+module.exports = function(socketio) {
   io = socketio;
-  app.get('/', index);
-  app.get('/events/:shortname', getEvent);
-  app.post('/vote/sms', voteSMS);
+  events = require('../events')(io);
+  return exports;
 };
 
 
@@ -16,15 +15,15 @@ module.exports = function(app, socketio) {
  * GET home page.
  */
 
-var index = function(req, res){
+var index = exports.index = function(req, res){
   res.render('index', { title: 'Express' });
-};
+}
 
 /*
  * GET an event.
  */
 
-var getEvent = function(req, res){
+, getEvent = exports.getEvent = function(req, res){
   events.findBy('all', {key: ['event:'+req.params.shortname], reduce:false}, function(err, event) {
     if (event) {
       events.voteCounts(event, function (err) {
@@ -46,13 +45,13 @@ var getEvent = function(req, res){
       res.send('We could not locate your event');
     }
   });
-};
+}
 
 /*
  * POST new vote via SMS
  */
 
-var voteSMS = function(request, response) {
+, voteSMS = exports.voteSMS = function(request, response) {
 
     if (twilio.validateExpressRequest(request, config.twilio.key) || config.twilio.disableSigCheck) {
         response.header('Content-Type', 'text/xml');
@@ -85,8 +84,9 @@ var voteSMS = function(request, response) {
                 var vote = parseInt(body);
                 events.saveVote(event, vote, from);
                 console.log('Accepting vote: ' + event.name + ', ' + from);
-                io.sockets.in(event.shortname).emit('vote', vote);
-                response.send('<Response><Sms>Thanks for your vote for ' + event.voteoptions[vote-1].name + '. Powered by Twilio.</Sms></Response>');      
+                //io.sockets.in(event.shortname).emit('vote', vote);
+                //response.send('<Response><Sms>Thanks for your vote for ' + event.voteoptions[vote-1].name + '. Powered by Twilio.</Sms></Response>');   
+                response.send('<Response></Response>');   
             } 
         }); 
     }

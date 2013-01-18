@@ -107,6 +107,10 @@ var config = require('./config')
                 console.log('Notifying of duplicate vote: ', votesToSave[i])
                 client.sendSms({To: votesToSave[i].phonenumber, From: votesToSave[i].event_phonenumber, Body: 'Sorry, you are only allowed to vote once.'});
               }
+              else {
+                io.sockets.in(votesToSave[i].event_id).emit('vote', votesToSave[i].vote);
+                client.sendSms({To: votesToSave[i].phonenumber, From: votesToSave[i].event_phonenumber, Body: 'Thanks for your vote! // powered by http://twil.io'});
+              }
             }
           }
         });
@@ -118,4 +122,10 @@ var config = require('./config')
   }
 
   , invalidateEventsJob = setInterval(invalidateEvents, 1000*secondsToInvalidateEvents)
-  , flushVotesJob = setInterval(flushVotes, 1000*secondsToFlushVotes);
+  , flushVotesJob = setInterval(flushVotes, 1000*secondsToFlushVotes)
+  , io;
+
+module.exports = function(socketio) {
+  io = socketio;
+  return exports;
+};
