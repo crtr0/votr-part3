@@ -1,0 +1,22 @@
+{
+   "_id": "event:demo",
+   "type": "event",
+   "shortname": "demo",
+   "name": "My Cool Demo Event",
+   "phonenumber": "+15555551212",
+   "state": "on",
+   "voteoptions": [
+       {
+           "id": 1,
+           "name": "Foo"
+       },
+       {
+           "id": 2,
+           "name": "Bar"
+       },
+       {
+           "id": 3,
+           "name": "Baz"
+       }
+   ]
+}
