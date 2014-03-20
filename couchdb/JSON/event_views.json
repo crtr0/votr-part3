@@ -5,7 +5,7 @@
             "map": "function (doc) { if (doc.type == 'event') { emit(doc.phonenumber, doc) } } "
         },
         "all": {
-            "map": "function (doc) { if (doc.type == 'event'){ emit([doc._id], doc); } else if (doc.type == 'vote') { emit([doc.event_id, doc.vote, doc._id], doc); } }",
+            "map": "function (doc) { if (doc.type == 'event') { emit([doc._id], doc); } else if (doc.type == 'vote') { emit([doc.event_id, doc.vote, doc._id], doc); } }",
             "reduce": "_count"
         },
         "votes": {

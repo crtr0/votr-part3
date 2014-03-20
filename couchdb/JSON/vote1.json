@@ -1,0 +1,7 @@
+{
+   "_id": "vote:event:demo:+15555551111",
+   "type": "vote",
+   "event_id": "event:demo",
+   "phonenumber": "+15555551111",
+   "vote": 1
+}
